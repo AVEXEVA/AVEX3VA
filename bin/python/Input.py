@@ -34,8 +34,5 @@ def Execute(var):
 
 i = 0
 
-
-print('~~~AveXteVaX~~~')
 Commands = Parse(sys.args[0])
 Execute(Commands)
-print('~~~\|>Et3<|/~~~')
