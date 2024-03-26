@@ -1,79 +1,165 @@
-<HTML>
-<HEAD>
-	<TITLE>AVEXƎVA</TITLE>
-	<META charset='UTF-8'>
-	<STYLE>
-		HTML {
-			scrollbar-width : none;
-			-ms-overflow-STYLE : none;
-			overflow : -moz-scrollbars-none;
+<html>	
+<head>
+	<title>AVEXƎVA</title>
+	<meta charset='utf-8'>
+	<style>
+		html {
+			scrollbar-width 	: none;
+			-ms-overflow-style  : none;
+			overflow  			: -moz-scrollbars-none;
 		}
-		HTML::-webkit-scrollbar, PRE::-webkit-scrollbar {
-			display:none;
+		html::-webkit-scrollbar, pre::-webkit-scrollbar {
+			display 			: none;
 		}
-		BODY {
-			margin : 0px;
-			background-color : white;
-			height : 100%;
-			overflow : hidden;
+		body {
+			margin 				: 0px;
+			background-color 	: white;
+			height 				: 100%;
+			overflow 			: hidden;
 		}
-		TABLE, TBODY, TR, TD {
-			WIDTH : 100%;
-			TEXT-ALIGN : CENTER;
-			border:0px;
-			border-collapse: collapse;
-			border-spacing : 0px;
-			FONT-SIZE : 1.25em;
-			POSITION:RELATIVE;
-			OVERFLOW:HIDDEN;
-			PADDING:0px;
+		td {
+			width 				: 33.333%;
 		}
-	</STYLE>
-</HEAD>
-<BODY>
-	<TABLE style='height:100%;'><TBODY>
-		<TR style='height:50%;background-color:white;'><TD></TD></TR>
-		<TR><TD><TABLE style='height:1.25em;background-color:black;'><TBODY>
-			<TR style='color:black;background-color:white;height:50%;'><TD><DIV style='bottom:-.625em;position:relative;'>AVEXƎVA</DIV></TD></TR>
-			<TR style='color:white;background-color:black;height:50%;'><TD><DIV style='top:-.625em;position:relative;'>AVEXƎVA</DIV></TD></TR>
-		</TBODY></TABLE></TD></TR>
-		<TR style='height:50%;background-color:black;'><TD></TD></TR>
-	</TBODY></TABLE>
-</BODY>
-</HTML><!--<HTML>
-<HEAD>
-	<TITLE>AVEXƎVA</TITLE>
-	<META charset='UTF-8'>
-	<STYLE>
-		HTML {
-			scrollbar-width : none;
-			-ms-overflow-STYLE : none;
-			overflow : -moz-scrollbars-none;
+		table, tbody, tr {
+			width 				: 100%;
 		}
-		HTML::-webkit-scrollbar, PRE::-webkit-scrollbar {
-			display:none;
+		table, tbody, tr, td {
+			text-align 			: center;
+			border 				: 0px;
+			border-collapse 	: collapse;
+			border-spacing 		: 0px;
+			font-size 			: 1.15em;
+			position 			: relative;
+			overflow 			: hidden;
+			padding 			: 0px;
 		}
-		BODY {
-			margin : 0px;
-			background-color : white;
+		table {
+			height 				: 100%;
 		}
-		HEADER {
-			width : 100%;
+		table tr:first-child, table tr:last-child { 
+			height 				: 50%; 
+		}
+		tr.div {
+			height 				: 25%;
+		}
+		tr.black {
+			color 				: white;
+			background-color 	: black;
+		}
+		tr.white {
+			color 				: black;
+			background-color 	: white;
+		}
+		tr#prepend, tr.prepend, tr#postend, tr.postend {
 			height : 50%;
-			z-index : 0;
-			background-color : black;
-			text-align : center;
-			color : white;
+		}
+		tr#avex, tr#xeva {
+			
+		}
+		tr#avex td span {
 			position : relative;
+			top : .61em;
 		}
-		HEADER {
-			position : absolute;
-			font-size : 42px;
-			bottom : 0px;
+		tr#xeva td span {
+			position : relative;
+			top : -.61em;
 		}
-	</STYLE>
-</HEAD>
-<BODY>
-	<HEADER>AVEXƎVA</HEADER>
-</BODY>
-</HTML>-->
+		iframe {
+			border : 0px;
+		}
+	</style>
+</head>
+<body style='height : 100%;'>
+	<table style='height:100%;'><tbody>
+		<tr id='prepend' class='div white'><td></td></tr>
+		<tr><td><table class='black'><tbody>
+			<tr id='avex' class='div white'><td onClick="document.location.href='https://www.avexeva.com/?url=https://www.avexeva.com';" class='center'><span>AVEXƎVA</span></td></tr>
+			<tr id='xeva' class='div black'><td onClick="document.location.href='https://www.avexeva.com/?url=https://www.avexeva.com';" class='center'><span>AVEXƎVA</span></td></tr>
+		</tbody></table></td></tr>
+		<tr id='postend' class='div black' style='height:50%;background-color:black;'><td></td></tr>
+	</tbody></table>
+	<script>
+		//Elements
+		let tr 			= document.createElement( 'tr' );
+		let td 			= document.createElement( 'td' );
+		let iframe 		= document.createElement( 'iframe' );
+		
+		let parameters 	= new URLSearchParams( document.location.search );
+		let url     	= parameters.get( 'url' );
+		let direct 		= parameters.get( 'direct' );
+		let prepend 	= tr.cloneNode( );
+		let postend 	= tr.cloneNode( );
+		let forward     = document.location.pathname.split( '/' ).pop( );
+
+		//Children
+		prepend.appendChild( td.cloneNode( ) );
+		postend.appendChild( td.cloneNode( ) );
+		tr.appendChild( td );
+		td.appendChild( iframe );
+
+		//Variables
+		direct  =	direct  == null
+ 						?	'0'
+ 						: 	direct + 1;
+
+		//Attributes
+		iframe.src 	= 	url + '?direct=' + direct;
+		iframe.setAttribute( 'width', '100%' );
+		iframe.setAttribute( 'height', '100%' );
+		iframe.setAttribute( 'id', 'iframe' );
+		prepend.setAttribute( 'class', 'prepend' );
+		postend.setAttribute( 'class', 'postend' );
+		
+		///IFrame
+		if( url !== null ){
+			document.getElementById( 'avex' ).after( tr );
+		} else if( direct == 1 ) {
+			//Variables
+			let av = document.createElement( 'td' );
+			let ex = document.createElement( 'td' );
+			let xe = document.createElement( 'td' );
+			let va = document.createElement( 'td' );
+
+			let d = document.createElement( 'span' );
+			let b = document.createElement( 'span' );
+			let p = document.createElement( 'span' );
+			let q = document.createElement( 'span' );
+
+			b.setAttribute( 'style', 'position : relative; top : .42em')
+			d.setAttribute( 'style', 'position : relative; top : .42em')
+
+			d.innerHTML = "d";
+			b.innerHTML = "b";
+			p.innerHTML = "p";
+			q.innerHTML = "q";
+
+			av.appendChild( d ); 
+			ex.appendChild( b );
+			xe.appendChild( p );
+			va.appendChild( q );
+
+			//Appends
+			let avex = document.getElementById( 'avex' );
+			avex.appendChild( ex );
+			avex.prepend( av, document.getElementsByClassName( 'center' )[ 0 ] );
+			
+			let xeva = document.getElementById( 'xeva' ); 
+			xeva.appendChild( xe );
+			xeva.prepend( va, document.getElementsByClassName( 'center' )[ 1 ] );
+		}
+		if( direct >= 1 ){
+			document.getElementById( 'xeva' ).after( postend );
+		}
+		console.log( tr );
+		console.log( td );
+		console.log( iframe );
+		console.log( url );
+		console.log( parameters );
+		console.log( direct );
+		console.log( prepend );
+		console.log( postend );
+
+
+	</script>
+</body>
+</html>
